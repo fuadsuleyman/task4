@@ -1,0 +1,18 @@
+{
+  "targets": {
+    "sqrex2": {
+      "hosting": {
+        "task4": [
+          "sqrex2"
+        ]
+      }
+    },
+    "task4-816a1": {
+      "hosting": {
+        "task4": [
+          "task4-816a1"
+        ]
+      }
+    }
+  }
+}
