@@ -1,0 +1,179 @@
+<div class="container">
+  <div class="row">
+      <h4>Task 4 solution by Fuad Suleymanov</h4>
+  </div>
+  <div class="row">
+    <h5><em>COVID-19 Test</em></h5>
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <div class="row">
+        <ul class="list-group">
+          <li class="list-group-item">My Solution describtion:</li>
+          <li class="list-group-item list-group-item-light">
+            <small>- we label COVID-19 tests 0 through 999, then each COVID-19 tests can be represented by a unique binary number ranging from 0000000000(0 decimal) to 111100111(999 decimal)</small></li>
+          <li class="list-group-item list-group-item-light">
+            <small>- 10 test strips is inaf for us, actually we may test maximum 1024 tests with 10 test strips, log2(N) = log2(1000) = 10</small></li>
+          <li class="list-group-item list-group-item-light">
+            <small>- in table below I show how drop tests to test stripts (whith small number of test and test stripts), 1 is where I drop tests, 0 is not drop. with similar combination I may find results of 1000 tests with 10 test stips</small></li>
+          <li class="list-group-item list-group-item-light">
+            <small>- Correct answer: in <span class='answer'>seven day</span> we find positive Covid-19 test</small></li>
+          <li class="list-group-item list-group-item-light">
+              <small>- My implementation is may be not so correct, may be reversed. I ask input amount of test strips we need.</small></li>
+        </ul>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          <table class="table table-borderless table-dark">
+            <thead>
+              <tr>
+                <th scope="col">Tests</th>
+                <th scope="col">Test Strip 1</th>
+                <th scope="col">Test Strip 2</th>
+                <th scope="col">Test Strip 3</th>
+                <th scope="col">Test Strip 4</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <th scope="row">1</th>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">2</th>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+              </tr><tr>
+                <th scope="row">3</th>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">4</th>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+              </tr><tr>
+                <th scope="row">5</th>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">6</th>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+              </tr><tr>
+                <th scope="row">7</th>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">8</th>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr><tr>
+                <th scope="row">9</th>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">10</th>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+                <td>1</td>
+              </tr><tr>
+                <th scope="row">11</th>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">12</th>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+                <td>1</td>
+              </tr><tr>
+                <th scope="row">13</th>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">14</th>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+                <td>1</td>
+              </tr><tr>
+                <th scope="row">15</th>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>0</td>
+              </tr><tr>
+                <th scope="row">16</th>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+                <td>1</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <div class="col-md-6">
+        <form [formGroup]="task4Form" (ngSubmit)="onFindStrips()">
+          <div class="row">
+            <label for="array">Please enter amount of your Covid-19 tests</label>
+            <input
+              type="text"
+              id="name"
+              class="form-control"
+              placeholder="Enter here" 
+              formControlName="numbers"
+              [ngClass]="{
+                'is-invalid': numbers.invalid && numbers.touched,
+                'is-valid': numbers.valid && numbers.touched
+              }">
+          </div>
+          <div class="row">
+            <p>
+              You Entered: {{ enteredAmount }}
+            </p>
+          </div>
+          <div class="row">
+            <button
+              class="btn btn-success"
+              type="submit"
+              [disabled]="!task4Form.valid">Get Result</button>
+          </div>
+          <hr>
+          <div class="row">
+            <h3 [ngClass]="{
+              'green': result === true, 
+              'red': result === false || result === 'You are out of constraints',
+              'black': result === null
+            }">
+              Test stripts you need: {{ result }}
+          </h3>
+          </div>
+        </form>      
+      </div>
+    </div>
+  </div>
+</div>
